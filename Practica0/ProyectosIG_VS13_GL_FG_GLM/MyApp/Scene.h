@@ -12,13 +12,14 @@
 class Scene	
 { 
 public:
-    Scene(Camera* cam): camera(cam) { };
+    Scene(Camera* cam, Viewport* view): camera(cam), viewPort(view) { };
 	  ~Scene();
     void init();
 	  void render();    
 	  
 protected:
 	  Camera* camera;
+	  Viewport* viewPort;
 	  std::vector<Entity*> objetos;
 };
 

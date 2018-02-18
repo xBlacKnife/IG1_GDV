@@ -29,7 +29,7 @@ void Entity::setMvM(dmat4 const& modelViewMat)
 }
 //-------------------------------------------------------------------------
 
-EjesRGB::EjesRGB(GLdouble l): Entity() 
+EjesRGB::EjesRGB(GLint x, GLint y, GLdouble l): Entity(x, y) 
 {
   mesh = Mesh::generateAxesRGB(l);
 }
@@ -43,7 +43,7 @@ void EjesRGB::draw()
 }
 //-------------------------------------------------------------------------
 
-Triangulo::Triangulo(GLdouble r)
+Triangulo::Triangulo(GLint x, GLint y, GLdouble r) : Entity(x, y)
 {
 	mesh = Mesh::generateTriangle(r);
 }
@@ -58,7 +58,7 @@ void Triangulo::draw()
 }
 //-------------------------------------------------------------------------
 
-TrianguloRGB::TrianguloRGB(GLdouble r)
+TrianguloRGB::TrianguloRGB(GLint x, GLint y, GLdouble r) : Entity(x, y)
 {
 	mesh = Mesh::generateTriangleRGB(r);
 }
@@ -72,7 +72,7 @@ void TrianguloRGB::draw()
 }
 //-------------------------------------------------------------------------
 
-TriPyramid::TriPyramid(GLdouble r, GLdouble h)
+TriPyramid::TriPyramid(GLint x, GLint y, GLdouble r, GLdouble h) : Entity(x, y)
 {
 	mesh = Mesh::generateTriPyramid(r, h);
 }
@@ -87,7 +87,7 @@ void TriPyramid::draw()
 }
 //-------------------------------------------------------------------------
 
-ContCubo::ContCubo(GLdouble l)
+ContCubo::ContCubo(GLint x, GLint y, GLdouble l) : Entity(x, y)
 {
 	mesh = Mesh::generateContCubo(l);
 }

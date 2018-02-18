@@ -9,10 +9,12 @@
 
 class Viewport {   
 public:
-  Viewport(GLsizei aw, GLsizei ah) : w(aw), h(ah) { };
+  Viewport(GLsizei aw, GLsizei ah) : x(0), y(0), w(aw), h(ah) { };
   ~Viewport() { };
 
   void setSize(GLsizei aw, GLsizei ah);
+
+  void setPosition(GLint ax, GLint ay);
  
   GLsizei getX() { return x; };
   GLsizei getY() { return y; };
@@ -20,7 +22,7 @@ public:
   GLsizei getH() { return h; };
 
 protected:
-  GLint x=0, y=0;
+  GLint x, y;
   GLsizei w, h;  
   void set();
 };

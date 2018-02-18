@@ -9,10 +9,18 @@ using namespace glm;
 
  void Viewport::setSize(GLsizei aw, GLsizei ah) 
  { 
-   w = aw; 
-   h = ah; 
-   set(); 
+	 w = aw; 
+	 h = ah; 
+	 set(); 
  }
+ //-------------------------------------------------------------------------
+ void Viewport::setPosition(GLint ax, GLint ay)
+ {
+	 x = ax;
+	 y = ay;
+	 set();
+ }
+
  //-------------------------------------------------------------------------
 
  void Viewport::set() 

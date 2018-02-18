@@ -13,11 +13,11 @@ void Scene::init()
   // textures  
 
   // objets
-  objetos.push_back(new EjesRGB(200.0));
+  objetos.push_back(new EjesRGB(0, 0, 200.0));
   //objetos.push_back(new Triangulo(200.0));
-  //objetos.push_back(new TrianguloRGB(200.0));
-  //objetos.push_back(new TriPyramid(200.0, 200.0));
-  objetos.push_back(new ContCubo(200.0));
+  objetos.push_back(new TrianguloRGB(400, 300, 200.0));
+  objetos.push_back(new TriPyramid(400, 0, 200.0, 200.0));
+  objetos.push_back(new ContCubo(0, 300, 200.0));
   
 }
 //-------------------------------------------------------------------------
@@ -35,9 +35,11 @@ Scene::~Scene()
 void Scene::render()
 {
   glMatrixMode(GL_MODELVIEW);
+  viewPort->setSize(400, 300);
 
 	for each (Entity* it in objetos)
 	{
+		viewPort->setPosition(it->getX(), it->getY());
 		it->render(camera->getViewMat());
 	}
 }

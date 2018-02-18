@@ -11,16 +11,22 @@
 class Entity 
 {
 public:
-  Entity() : modelMat(1.0) { };
+  Entity(GLint x, GLint y) : modelMat(1.0), x(x), y(y) { };
   virtual ~Entity() { delete mesh; };
 
   virtual void render(glm::dmat4 const& modelViewMat);
+
+  GLint getX() { return x; };
+  GLint getY() { return y; };
   
 protected:
   Mesh* mesh = nullptr;
   glm::dmat4 modelMat;
   virtual void draw();
   virtual void setMvM(glm::dmat4 const& modelViewMat);
+
+private:
+	GLint x, y;
 };
 
 //-------------------------------------------------------------------------
@@ -28,7 +34,7 @@ protected:
 class EjesRGB : public Entity 
 {
 public:
-  EjesRGB(GLdouble l);
+  EjesRGB(GLint x, GLint y, GLdouble l);
   ~EjesRGB() { };
   virtual void draw();
 };
@@ -38,7 +44,7 @@ public:
 class Triangulo : public Entity
 {
 public:
-	Triangulo(GLdouble r);
+	Triangulo(GLint x, GLint y, GLdouble r);
 	~Triangulo() { };
 	virtual void draw();
 };
@@ -48,7 +54,7 @@ public:
 class TrianguloRGB : public Entity
 {
 public:
-	TrianguloRGB(GLdouble r);
+	TrianguloRGB(GLint x, GLint y, GLdouble r);
 	~TrianguloRGB() { };
 	virtual void draw();
 };
@@ -58,7 +64,7 @@ public:
 class TriPyramid : public Entity
 {
 public:
-	TriPyramid(GLdouble r, GLdouble h);
+	TriPyramid(GLint x, GLint y, GLdouble r, GLdouble h);
 	~TriPyramid() { };
 	virtual void draw();
 };
@@ -68,7 +74,7 @@ public:
 class ContCubo : public Entity
 {
 public:
-	ContCubo(GLdouble l);
+	ContCubo(GLint x, GLint y, GLdouble l);
 	~ContCubo() { };
 	virtual void draw();
 };
