@@ -148,4 +148,30 @@ Mesh * Mesh::generateContCubo(GLdouble l)
 	return m;
 }
 
+Mesh * Mesh::generaDragon(GLuint numVert)
+{
+	Mesh* m = new Mesh();
+	m->type = GL_POINTS;
+	m->numVertices = numVert;
+
+	m->vertices = new dvec3[m->numVertices];
+	m->vertices[0] = dvec3(0.0, 0.0, 0.0);
+
+	double PR1 = 0.787473;
+
+	for (int i = 1; i < numVert; i++) {
+		double azar = rand() / double(RAND_MAX);
+		if (azar < PR1) {
+			m->vertices[i] = dvec3(0.824074 * m->vertices[i - 1].x + 0.281482 * m->vertices[i - 1].y - 0.882290,
+				-0.212346 * m->vertices[i - 1].x + 0.864198 * m->vertices[i - 1].y - 0.110607, 0.0);
+		}
+		else {
+			m->vertices[i] = dvec3(0.088272 * m->vertices[i - 1].x + 0.520988 * m->vertices[i - 1].y + 0.785360,
+				-0.463889 * m->vertices[i - 1].x - 0.377778 * m->vertices[i - 1].y + 8.095795, 0.0);
+		}
+	}
+
+	return m;
+}
+
 //-------------------------------------------------------------------------

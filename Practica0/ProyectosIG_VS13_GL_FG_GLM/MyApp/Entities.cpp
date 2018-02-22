@@ -102,4 +102,19 @@ void ContCubo::draw()
 }
 //-------------------------------------------------------------------------
 
+Dragon::Dragon(GLint x, GLint y, GLuint numVert) : Entity(x, y)
+{
+	mesh = Mesh::generaDragon(numVert);
+}
+//-------------------------------------------------------------------------
+
+void Dragon::draw()
+{
+	glColor3f(0.0, 0.0, 1.0);
+
+	glPointSize(2);
+	mesh->draw();
+	glPointSize(1);
+}
+//-------------------------------------------------------------------------
 

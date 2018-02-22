@@ -81,5 +81,14 @@ public:
 
 //-------------------------------------------------------------------------
 
+class Dragon : public Entity
+{
+public:
+	Dragon(GLint x, GLint y, GLuint numVert);
+	~Dragon() { };
+	virtual void draw();
+};
+
+//
 
 #endif //_H_Entities_H_
