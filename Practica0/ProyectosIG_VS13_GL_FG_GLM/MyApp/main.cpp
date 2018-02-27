@@ -73,7 +73,7 @@ void display()   // double buffer
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
   
   scene.render();   
-    
+
   glutSwapBuffers();  
 }
 //-------------------------------------------------------------------------
@@ -106,6 +106,9 @@ void key(unsigned char key, int x, int y)
 	  break;
   case 'o':
 	  camera.setAZ();
+	  break;
+  case 'a':
+	  dynamic_cast<Diabolo*>(scene.getDiabolo())->handleEvent(5);
 	  break;
   default:
     need_redisplay = false;

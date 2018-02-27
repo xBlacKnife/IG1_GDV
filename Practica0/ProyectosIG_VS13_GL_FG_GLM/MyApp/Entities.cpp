@@ -2,6 +2,7 @@
 
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
+#include <iostream>
 
 using namespace glm;
 
@@ -118,3 +119,98 @@ void Dragon::draw()
 }
 //-------------------------------------------------------------------------
 
+Diabolo::Diabolo(GLint x, GLint y, GLdouble r, GLdouble h) : Entity(x, y), angle_(0)
+{
+	mesh = Mesh::generateTriPyramid(r, h);
+}
+//-------------------------------------------------------------------------
+
+void Diabolo::draw()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glLineWidth(2);
+	mesh->draw();
+	glLineWidth(1);
+}
+//-------------------------------------------------------------------------
+
+void Diabolo::render(glm::dmat4 const & modelViewMat)
+{
+	
+	modelMat = rotate(modelMat, radians(angle_), dvec3(0, 0, 1));
+	glMatrixMode(GL_MODELVIEW);
+
+	dmat4 aMat = modelViewMat * modelMat;
+
+	for (int i = 0; i < 2; i++)
+	{
+		aMat = translate(aMat, dvec3(0.0, 0.0, -300.0));
+		glLoadMatrixd(value_ptr(aMat));
+		draw();
+
+		aMat = rotate(aMat, radians(60.0), dvec3(0, 0, 1));
+		glLoadMatrixd(value_ptr(aMat));
+		draw();
+
+		aMat = translate(aMat, dvec3(0.0, 0.0, 300.0));
+		aMat = rotate(aMat, radians(180.0), dvec3(0, 1, 0));
+	}
+
+	angle_ = 0;
+}
+//-------------------------------------------------------------------------
+
+void Diabolo::handleEvent(double angle)
+{
+	angle_ = angle;
+}
+//-------------------------------------------------------------------------
+
+Cubo::Cubo(GLint x, GLint y, GLdouble l) : Entity(x, y)
+{
+	mesh = Mesh::generateContCubo(l);
+	mesh2 = Mesh::generateCuadrado(l);
+}
+//-------------------------------------------------------------------------
+
+void Cubo::draw()
+{
+	//glPolygonMode(GL_FRONT, GL_LINE);
+	//glPolygonMode(GL_BACK, GL_POINT);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glLineWidth(2);
+	mesh->draw();
+	glLineWidth(1);
+}
+//-------------------------------------------------------------------------
+
+void Cubo::drawTop()
+{
+	//glPolygonMode(GL_FRONT, GL_LINE);
+	//glPolygonMode(GL_BACK, GL_POINT);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glLineWidth(2);
+	mesh2->draw();
+	glLineWidth(1);
+}
+//-------------------------------------------------------------------------
+
+void Cubo::render(glm::dmat4 const & modelViewMat)
+{
+	dmat4 aMat = modelViewMat * modelMat;
+	glLoadMatrixd(value_ptr(aMat));
+	draw();
+
+	aMat = translate(aMat, dvec3(0.0, -100.0, 0.0));
+	glLoadMatrixd(value_ptr(aMat));
+	drawTop();
+
+	aMat = translate(aMat, dvec3(0.0, 100.0, 0.0));
+	aMat = rotate(aMat, radians(45.0), dvec3(0, 0, 1));
+	glLoadMatrixd(value_ptr(aMat));
+	drawTop();
+
+	aMat = translate(aMat, dvec3(240.0, 0.0, 0.0));
+	glLoadMatrixd(value_ptr(aMat));
+	drawTop();
+}

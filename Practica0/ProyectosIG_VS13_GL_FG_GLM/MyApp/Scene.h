@@ -15,7 +15,8 @@ public:
     Scene(Camera* cam, Viewport* view): camera(cam), viewPort(view) { };
 	  ~Scene();
     void init();
-	  void render();    
+	void render(); 
+	Entity* getDiabolo() { return objetos[1]; };
 	  
 protected:
 	  Camera* camera;

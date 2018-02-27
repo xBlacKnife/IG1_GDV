@@ -16,6 +16,7 @@ public:
   static Mesh* generateTriPyramid(GLdouble r, GLdouble h);
   static Mesh* generateContCubo(GLdouble l);
   static Mesh* generaDragon(GLuint numVert);
+  static Mesh* generateCuadrado(GLdouble l);
  
   Mesh(void) { };
   ~Mesh(void);

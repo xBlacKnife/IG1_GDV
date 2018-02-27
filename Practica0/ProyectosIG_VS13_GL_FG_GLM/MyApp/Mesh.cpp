@@ -174,4 +174,25 @@ Mesh * Mesh::generaDragon(GLuint numVert)
 	return m;
 }
 
+Mesh * Mesh::generateCuadrado(GLdouble l)
+{
+	Mesh* m = new Mesh();
+	m->type = GL_TRIANGLE_STRIP;
+	m->numVertices = 4;
+
+	m->vertices = new dvec3[m->numVertices];
+	m->vertices[0] = dvec3(-l / 2, 0, -l / 2);
+	m->vertices[1] = dvec3(l / 2, 0, -l / 2);
+	m->vertices[2] = dvec3(-l / 2, 0, l / 2);
+	m->vertices[3] = dvec3(l / 2, 0, l / 2);
+
+	m->colors = new dvec4[m->numVertices];
+	m->colors[0] = dvec4(0.0, 0.0, 0.0, 0.0);
+	m->colors[1] = dvec4(0.0, 0.0, 0.0, 0.0);
+	m->colors[2] = dvec4(0.0, 0.0, 0.0, 0.0);
+	m->colors[3] = dvec4(0.0, 0.0, 0.0, 0.0);
+
+	return m;
+}
+
 //-------------------------------------------------------------------------

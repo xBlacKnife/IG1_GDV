@@ -13,12 +13,14 @@ void Scene::init()
   // textures  
 
   // objets
-  //objetos.push_back(new EjesRGB(0, 0, 200.0));
+  objetos.push_back(new EjesRGB(0, 0, 200.0));
   //objetos.push_back(new Triangulo(200.0));
   //objetos.push_back(new TrianguloRGB(400, 300, 200.0));
   //objetos.push_back(new TriPyramid(400, 0, 200.0, 200.0));
   //objetos.push_back(new ContCubo(0, 300, 200.0));
-  objetos.push_back(new Dragon(0, 0, 3000));
+  //objetos.push_back(new Dragon(0, 0, 3000));
+  //objetos.push_back(new Diabolo(0, 0, 200.0, 300.0));
+  objetos.push_back(new Cubo(0, 0, 200.0));
   
 }
 //-------------------------------------------------------------------------
@@ -45,4 +47,3 @@ void Scene::render()
 	}
 }
 //-------------------------------------------------------------------------
-
