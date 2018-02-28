@@ -119,6 +119,17 @@ void Dragon::draw()
 }
 //-------------------------------------------------------------------------
 
+void Dragon::render(glm::dmat4 const & modelViewMat)
+{
+	dmat4 aMat = modelViewMat * modelMat;
+
+	aMat = translate(aMat, dvec3(-40.0, -170.0, -300.0));
+	aMat = scale(aMat, dvec3(40.0, 40.0, 0.0));
+	glLoadMatrixd(value_ptr(aMat));
+	draw();
+}
+//-------------------------------------------------------------------------
+
 Diabolo::Diabolo(GLint x, GLint y, GLdouble r, GLdouble h) : Entity(x, y), angle_(0)
 {
 	mesh = Mesh::generateTriPyramid(r, h);
@@ -175,9 +186,9 @@ Cubo::Cubo(GLint x, GLint y, GLdouble l) : Entity(x, y)
 
 void Cubo::draw()
 {
-	//glPolygonMode(GL_FRONT, GL_LINE);
-	//glPolygonMode(GL_BACK, GL_POINT);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_POINT);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glLineWidth(2);
 	mesh->draw();
 	glLineWidth(1);
@@ -186,9 +197,9 @@ void Cubo::draw()
 
 void Cubo::drawTop()
 {
-	//glPolygonMode(GL_FRONT, GL_LINE);
-	//glPolygonMode(GL_BACK, GL_POINT);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_POINT);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glLineWidth(2);
 	mesh2->draw();
 	glLineWidth(1);
@@ -201,16 +212,30 @@ void Cubo::render(glm::dmat4 const & modelViewMat)
 	glLoadMatrixd(value_ptr(aMat));
 	draw();
 
+	aMat = modelViewMat * modelMat;
+	aMat = rotate(aMat, radians(45.0), dvec3(0, 0, 1));
+	aMat = translate(aMat, dvec3(0.0, 142.0, 0.0));
+	aMat = translate(aMat, dvec3(100.0, 0.0, 0.0));
+	glLoadMatrixd(value_ptr(aMat));
+	drawTop();
+
+	aMat = modelViewMat * modelMat; //reiniciamos la matriz
 	aMat = translate(aMat, dvec3(0.0, -100.0, 0.0));
 	glLoadMatrixd(value_ptr(aMat));
 	drawTop();
+}
+//-------------------------------------------------------------------------
 
-	aMat = translate(aMat, dvec3(0.0, 100.0, 0.0));
-	aMat = rotate(aMat, radians(45.0), dvec3(0, 0, 1));
-	glLoadMatrixd(value_ptr(aMat));
-	drawTop();
+Espiral::Espiral(GLint x, GLint y, glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert)
+	: Entity(x, y)
+{
+	mesh = Mesh::generaPoliespiral(verIni, angIni, incrAng, ladoIni, incrLado, numVert);
+}
 
-	aMat = translate(aMat, dvec3(240.0, 0.0, 0.0));
-	glLoadMatrixd(value_ptr(aMat));
-	drawTop();
+void Espiral::draw()
+{
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glLineWidth(2);
+	mesh->draw();
+	glLineWidth(1);
 }

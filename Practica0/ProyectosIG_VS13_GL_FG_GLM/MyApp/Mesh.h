@@ -16,6 +16,8 @@ public:
   static Mesh* generateTriPyramid(GLdouble r, GLdouble h);
   static Mesh* generateContCubo(GLdouble l);
   static Mesh* generaDragon(GLuint numVert);
+  static Mesh* generaPoliespiral(glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, 
+	  GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
   static Mesh* generateCuadrado(GLdouble l);
  
   Mesh(void) { };
@@ -23,6 +25,8 @@ public:
   virtual void draw();
   glm::dvec3* getVertices() { return vertices; };
   glm::dvec4* getColours() { return colors; };
+
+  static glm::dvec2 mover(GLdouble x, GLdouble y, GLdouble ang, GLdouble lon);
    
 protected:
    GLuint numVertices = 0;

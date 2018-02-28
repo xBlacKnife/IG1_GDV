@@ -174,6 +174,34 @@ Mesh * Mesh::generaDragon(GLuint numVert)
 	return m;
 }
 
+Mesh * Mesh::generaPoliespiral(glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, 
+	GLdouble ladoIni, GLdouble incrLado, GLuint numVert)
+{
+		Mesh* m = new Mesh();
+		m->type = GL_LINE_STRIP;
+		m->numVertices = numVert;
+		m->vertices = new dvec3[m->numVertices];
+		m->colors = new dvec4[m->numVertices];
+		//Vertice inicial
+		m->vertices[0] = dvec3(verIni, 0);
+		//Los demas vertices
+		for (int i = 1; i < numVert; i++)
+		{
+			m->vertices[i] = dvec3(mover(m->vertices[i - 1].x, m->vertices[i - 1].y, angIni + incrAng * i, ladoIni + incrLado * i), 0);
+			m->colors[i] = dvec4(0.0, 0.0, 0.0, 0.0);
+		}
+		return m;
+}
+
+//-------------------------------------------------------------------------
+
+dvec2 Mesh::mover(GLdouble x, GLdouble y, GLdouble ang, GLdouble lon)
+{
+	return dvec2(x + lon*cos(radians(ang)), y + lon*sin(radians(ang)));
+}
+
+//-------------------------------------------------------------------------
+
 Mesh * Mesh::generateCuadrado(GLdouble l)
 {
 	Mesh* m = new Mesh();

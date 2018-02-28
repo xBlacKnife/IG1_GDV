@@ -95,6 +95,7 @@ public:
 	Dragon(GLint x, GLint y, GLuint numVert);
 	~Dragon() { };
 	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
 	virtual void handleEvent(double angle) {}
 };
 
@@ -114,6 +115,19 @@ private:
 };
 
 //-------------------------------------------------------------------------
+
+class Espiral : public Entity
+{
+public:
+	Espiral(GLint x, GLint y, glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng,
+		GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
+	~Espiral() { };
+	virtual void draw();
+	virtual void handleEvent(double angle) {};
+};
+
+//-------------------------------------------------------------------------
+
 
 class Cubo : public Entity
 {
