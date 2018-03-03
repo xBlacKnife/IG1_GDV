@@ -123,6 +123,7 @@ public:
 		GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
 	~Espiral() { };
 	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
 	virtual void handleEvent(double angle) {};
 };
 

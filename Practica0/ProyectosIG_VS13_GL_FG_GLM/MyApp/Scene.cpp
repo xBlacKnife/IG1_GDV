@@ -19,11 +19,11 @@ void Scene::init()
   //objetos.push_back(new TriPyramid(400, 0, 200.0, 200.0));
   //objetos.push_back(new ContCubo(0, 300, 200.0));
 
-  objetos.push_back(new Diabolo(0, 0, 200.0, 300.0));
   objetos.push_back(new Dragon(400, 300, 3000));
-  objetos.push_back(new Cubo(400, 0, 200.0));
   glm::dvec2 verIni(0, 0);
   objetos.push_back(new Espiral(0, 300, verIni, 0, 45, 1, 1, 50));
+  objetos.push_back(new Diabolo(0, 0, 200.0, 300.0));
+  objetos.push_back(new Cubo(400, 0, 200.0));
   
 }
 //-------------------------------------------------------------------------
@@ -48,5 +48,20 @@ void Scene::render()
 		viewPort->setPosition(it->getX(), it->getY());
 		it->render(camera->getViewMat());
 	}
+}
+Entity * Scene::getDiabolo()
+{
+	std::vector<Entity*>::iterator it = objetos.begin();
+	bool diaEncontrado = false;
+	while (it != objetos.end() && !diaEncontrado)
+	{
+		Diabolo* diabolo = dynamic_cast<Diabolo*>(*it);
+		if (diabolo != nullptr)
+			diaEncontrado = true;
+		else
+			it++;
+	}
+
+	return (*it);
 }
 //-------------------------------------------------------------------------

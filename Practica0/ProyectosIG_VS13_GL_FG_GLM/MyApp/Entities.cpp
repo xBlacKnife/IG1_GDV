@@ -231,6 +231,7 @@ Espiral::Espiral(GLint x, GLint y, glm::dvec2 verIni, GLdouble angIni, GLdouble 
 {
 	mesh = Mesh::generaPoliespiral(verIni, angIni, incrAng, ladoIni, incrLado, numVert);
 }
+//-------------------------------------------------------------------------
 
 void Espiral::draw()
 {
@@ -238,4 +239,14 @@ void Espiral::draw()
 	glLineWidth(2);
 	mesh->draw();
 	glLineWidth(1);
+}
+//-------------------------------------------------------------------------
+
+void Espiral::render(glm::dmat4 const & modelViewMat)
+{
+	dmat4 aMat = modelViewMat * modelMat;
+
+	aMat = scale(aMat, dvec3(5.0, 5.0, 0.0));
+	glLoadMatrixd(value_ptr(aMat));
+	draw();
 }
