@@ -114,8 +114,8 @@ void key(unsigned char key, int x, int y)
 	  camera.setAZ();
 	  break;
   case 'f':
-	  tex.loadColorBuffer(viewPort.getW(), viewPort.getH());
-	  tex.save("photo.bmp");
+	  tex.loadColorBuffer(glutGet(GLUT_INIT_WINDOW_WIDTH), glutGet(GLUT_INIT_WINDOW_HEIGHT));
+	  tex.save("..\\Bmps\\photo.bmp");
 	  break;
   case 'r':
   {

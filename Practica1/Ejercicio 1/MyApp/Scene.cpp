@@ -31,6 +31,7 @@ void Scene::init()
   objetos.push_back(new CuboText(0, 0, 200));
   objetos.push_back(new DiaboloText(0, 0, 200.0, 300.0));
   objetos.push_back(new GenerateFloorText(0, 0, 2000, 8, 8));
+  objetos.push_back(new Foto(0, 0, 200));
   objetos.push_back(new Grass(0, 0, 200));
   objetos.push_back(new GlassPot(0, 0, 200));
   

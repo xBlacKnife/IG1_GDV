@@ -231,4 +231,20 @@ public:
 
 };
 
+//-------------------------------------------------------------------------
+
+class Foto : public Entity
+{
+public:
+	Foto(GLint x, GLint y, GLdouble l);
+	~Foto() { };
+	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
+	//virtual void update();
+	virtual void handleEvent(double angle) {}
+	Texture textura;
+	int repX;
+	int repY;
+};
+
 #endif //_H_Entities_H_

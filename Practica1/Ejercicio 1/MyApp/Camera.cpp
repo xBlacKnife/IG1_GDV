@@ -40,7 +40,7 @@ void Camera::setAZ()
   pitch_ = 0;
   yaw_ = 0;
 
-  viewMat = lookAt(eye, look, up);
+  viewMat = lookAt(eye, eye + front, up);
   setVM();
 }
 //-------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void Camera::set3D()
   pitch_ = degrees(asin(front.y));
   yaw_ = degrees(asin(front.x) / cos(radians(pitch_)));
 
-  viewMat = lookAt(eye, look, up);
+  viewMat = lookAt(eye, eye + front, up);
   setVM();
 }
 //-------------------------------------------------------------------------
@@ -134,7 +134,6 @@ void Camera::rotatePY(GLdouble incrPitch, GLdouble incrYaw)
 	front = glm::normalize(front);
 
 	right = normalize(cross(up, -front));
-	right = glm::normalize(right);
 
 	viewMat = lookAt(eye, eye + front, up);
 }

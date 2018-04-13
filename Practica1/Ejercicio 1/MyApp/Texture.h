@@ -14,6 +14,7 @@ public:
 	void unbind() { glBindTexture(GL_TEXTURE_2D, 0); };
 	void loadColorBuffer(GLsizei width, GLsizei height);
 	void save(const std::string & BMP_Name);
+	void loadPhoto(GLubyte alpha);
 protected:
 	GLuint w, h; // dimensiones de la imagen
 	GLuint id; // identificador interno (GPU) de la textura

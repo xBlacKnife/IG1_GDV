@@ -59,6 +59,23 @@ void Texture::save(const std::string & BMP_Name)
 	array.save_bmp24BGR(BMP_Name);
 }
 
+void Texture::loadPhoto(GLubyte alpha)
+{
+	PixMap32RGBA array;
+	array.create_pixmap(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, array.data());
+
+	if (id == 0) init();
+
+	if (alpha != 255) array.set_alpha(alpha);
+	w = array.width();
+	h = array.height();
+	glBindTexture(GL_TEXTURE_2D, id);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA,
+		GL_UNSIGNED_BYTE, array.data());
+
+}
+
 void Texture::init()
 {
 	glGenTextures(1, &id); // genera un identificador para una nueva textura

@@ -447,12 +447,14 @@ void GlassPot::draw()
 
 void GlassPot::render(glm::dmat4 const & modelViewMat)
 {
+	glDepthMask(GL_FALSE);
 	glMatrixMode(GL_MODELVIEW);
 
 	dmat4 aMat = modelViewMat * modelMat;
 	glLoadMatrixd(value_ptr(aMat));
 
 	draw();
+	glDepthMask(GL_TRUE);
 }
 
 //---------------------------------------------------
@@ -480,10 +482,7 @@ void Grass::draw()
 
 void Grass::render(glm::dmat4 const & modelViewMat)
 {
-	glMatrixMode(GL_MODELVIEW);
-
-	glEnable(GL_ALPHA_TEST);
-	glAlphaFunc(GL_GREATER, 0.0f);
+	glDepthMask(GL_FALSE);
 
 	dmat4 aMat = modelViewMat * modelMat;
 	glLoadMatrixd(value_ptr(aMat));
@@ -493,6 +492,40 @@ void Grass::render(glm::dmat4 const & modelViewMat)
 	glLoadMatrixd(value_ptr(aMat));
 	draw();
 
-	aMat = rotate(aMat, radians(-90.0), dvec3(0, 0, 1));
-	glDisable(GL_ALPHA_TEST);
+	glDepthMask(GL_TRUE);
+}
+
+//---------------------------------------------------
+
+Foto::Foto(GLint x, GLint y, GLdouble l) : Entity(x, y)
+{
+	mesh = Mesh::generateRectangleText(l, 0, 0);
+	textura.load("..\\Bmps\\photo.bmp");
+
+	modelMat = rotate(modelMat, radians(90.0), dvec3(1, 0, 0));
+	modelMat = rotate(modelMat, radians(180.0), dvec3(0, 0, 1));
+	modelMat = rotate(modelMat, radians(180.0), dvec3(0, 1, 0));
+	modelMat = translate(modelMat, dvec3(0.0, 0.0, 1.0));
+}
+
+void Foto::draw()
+{
+	textura.loadColorBuffer(glutGet(GLUT_INIT_WINDOW_WIDTH), glutGet(GLUT_INIT_WINDOW_HEIGHT));
+	textura.loadPhoto(255);
+	//textura.bind();
+
+	glLineWidth(2);
+	mesh->draw();
+	glLineWidth(1);
+
+	//textura.unbind();
+}
+
+void Foto::render(glm::dmat4 const & modelViewMat)
+{
+	dmat4 aMat = modelViewMat * modelMat;
+
+	aMat = rotate(aMat, radians(90.0), dvec3(1, 0, 0));
+	glLoadMatrixd(value_ptr(aMat));
+	draw();
 }
