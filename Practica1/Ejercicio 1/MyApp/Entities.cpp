@@ -481,6 +481,7 @@ void Grass::draw()
 void Grass::render(glm::dmat4 const & modelViewMat)
 {
 	glMatrixMode(GL_MODELVIEW);
+
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.0f);
 

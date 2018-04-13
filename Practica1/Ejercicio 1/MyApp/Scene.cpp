@@ -8,8 +8,8 @@ void Scene::init()
   glEnable(GL_DEPTH_TEST);  
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH |
-	  GLUT_STENCIL);
+  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH/* |
+	  GLUT_STENCIL*/);
   camera->setAZ();
     
   // lights

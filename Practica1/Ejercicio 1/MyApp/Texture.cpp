@@ -48,8 +48,7 @@ void Texture::bind()
 void Texture::loadColorBuffer(GLsizei width, GLsizei height)
 {
 	glReadBuffer(GL_FRONT);
-	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		0, 0, width, height, 0);
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, width, height, 0);
 }
 
 void Texture::save(const std::string & BMP_Name)
